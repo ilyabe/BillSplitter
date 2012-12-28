@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+<table>
+	<tr>
+		<td><strong>Home</strong></td>
+		<td><strong>User</strong></td>
+		<td><strong>Status</strong></td>
+		<td><strong>Action</strong></td>
+	</tr>
+{{for home_list in my_requests:}}
+	{{for home in home_list:}}
+		<tr>
+			<td>{{=name_of_home(home['home'])}}</td>
+			<td>{{=name_of_user(home['user'])}}</td>
+			<td>{{=home['status']}}</td>
+			<td>
+				<button onclick="ajax('{{=URL('approve', args=[home['id']])}}',[],null);$(this).parent().html('Approved');">Approve</button>
+				<button onclick="ajax('{{=URL('deny', args=[home['id']])}}',[],null);$(this).parent().html('Denied');">Deny</button>
+			</td>
+		</tr>
+	{{pass}}
+{{pass}}
+</table>

@@ -1,0 +1,19 @@
+{{extend 'layout.html'}}
+
+<!-- Display the user's homes -->
+<table>
+	<tr>
+		<td><strong>ID</strong></td>
+		<td><strong>Home name</strong></td>
+		<td><strong>Add bills</strong></td>
+		<td><strong>View bills</strong></td>
+	</tr>
+{{for home in my_homes:}}
+	<tr>
+		<td>{{=home.id}}</td>
+		<td>{{=home.home_name}}</td>
+		<td><a href="{{=URL('add_bill', args=[home.id])}}">Add bill</a></td>
+		<td><a href="{{=URL('view_bills', args=[home.id])}}">View bills</a></td>
+	<tr>
+{{pass}}
+</table>

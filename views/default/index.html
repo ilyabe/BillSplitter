@@ -1,0 +1,35 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+{{if 'message' in globals():}}
+<h3>{{=message}}</h3>
+
+<h4>{{=T('How does it work?')}}</h4>
+<ol>
+  <li>{{=T('Using the menu at the top, create a Home by entering your address')}}</li>
+  <li>{{=T('Have your roommates register on the website and select your home ID on the "Join Home" page')}}</li>
+  <li>{{=T('Go to your "Review Requests" page and approve your roommates')}}</li>
+  <li>{{=T('Upload your bills by clicking Add Bill on your My Homes page and see them displayed on the View Bills page')}}</li>
+  <li>{{=T('Your roommates can view the bills and can click a link on the View Bills to pay the month\'s bill.')}}</li>
+</ol>
+<ul><strong>Notes:</strong>
+  <li>Accounting works based on the total of the bills, subtracting the user's payments to date.</li>
+  <li>There is a bug in that the Admin of a home can request to join their own home. Once they approve themselves, they are no longer admin.</li>
+  <li>Payments go to a Stripe.com account. API key can be updated in the charge() method in default.py</li>
+</ul>
+{{elif 'content' in globals():}}
+{{=content}}
+{{else:}}
+{{=BEAUTIFY(response._vars)}}
+{{pass}}
+
+{{block right_sidebar}}
+{{=A(T("Administrative Interface"), _href=URL('admin','default','index'), _class='btn',
+     _style='margin-top: 1em;')}}
+<h6>{{=T("Don't know what to do?")}}</h6>
+<ul>
+  <li>{{=A(T("Online examples"), _href=URL('examples','default','index'))}}</li>
+  <li><a href="http://web2py.com">web2py.com</a></li>
+  <li><a href="http://web2py.com/book">{{=T('Documentation')}}</a></li>
+</ul>
+{{end}}

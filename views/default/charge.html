@@ -1,0 +1,9 @@
+{{extend 'layout.html'}}
+
+{{if paid:}}
+	<h2>Payment Processed</h2>
+	<h4>Thanks, your payment of ${{=request.args(0)}} has been processed.</h4>
+{{else:}}
+	<h2>Payment Unsuccessful</h2>
+	<h4>Your payment wasn't processed (i.e. invalid credit card, missing field). Please go back and try again.</h4>
+{{pass}}

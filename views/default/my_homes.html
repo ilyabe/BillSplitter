@@ -1,0 +1,34 @@
+{{extend 'layout.html'}}
+
+<!-- Display the user's homes -->
+<table>
+	<tr>
+		<td><strong>ID</strong></td>
+		<td><strong>Home name</strong></td>
+		<td><strong>Add bills</strong></td>
+		<td><strong>View bills</strong></td>
+		<td><strong>Status</strong></td>
+	</tr>
+
+{{for home in my_homes:}}
+	<tr>
+		<td>{{=home['id']}}</td>
+		<td>{{=home['name']}}</td>
+		<td>
+			{{if home['is_admin']:}}
+				<a href="{{=URL('add_bill', args=[home['id']])}}">Add Bill</a>
+			{{else:}}
+				Admin Only
+			{{pass}}
+		</td>
+		<td>
+			{{if home['status'] == 'active':}}
+				<a href="{{=URL('view_bills', args=[home['id']])}}">View Bills</a>
+			{{else:}}
+				Awaiting Approval
+			{{pass}}
+		</td>
+		<td>{{=home['status']}}</td>
+	</tr>
+{{pass}}
+</table>

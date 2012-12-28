@@ -1,0 +1,26 @@
+{{extend 'layout.html'}}
+
+<h4>Hello, {{=name_of_user(request.args(0))}}, enter your credit card information and click Submit Payment to pay ${{=request.args(1)}}</h4>
+
+<ul><b><u>Notes:</u>
+	<li>No validation here. Information should be entered correctly.</li>
+	<li>Use Stripe dummy credit card 4242424242424242.</li>
+</b></ul>
+
+<form action="{{=URL('charge', args=[request.args(1), request.args(2)])}}" method="POST" id="payment-form" name="payment-form">
+  <div class="form-row">
+    <label>Card Number</label>
+    <input type="text" size="20" autocomplete="off" class="card-number" name="card-number"/>
+  </div>
+  <div class="form-row">
+    <label>CVC</label>
+    <input type="text" size="4" autocomplete="off" class="card-cvc" name ="card-cvc"/>
+  </div>
+  <div class="form-row">
+    <label>Expiration (MM/YYYY)</label>
+    <input type="text" size="2" class="card-expiry-month" name="card-expiry-month"/>
+    <span> / </span>
+    <input type="text" size="4" class="card-expiry-year" name="card-expiry-year"/>
+  </div>
+  <button type="submit" class="submit-button">Submit Payment</button>
+</form>

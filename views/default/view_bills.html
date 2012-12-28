@@ -1,0 +1,34 @@
+{{extend 'layout.html'}}
+
+<!--<h3>Total Bill for {{#=name_of_month(request.now.month)}} {{#=request.now.year}}: ${{#=total_bill}}</h3>-->
+{{if not is_admin_user:}}
+	<h3>Total All Time Bill is: ${{=total_bill}}</h3>
+	<h4>You have paid a total to date of: ${{=this_roommates_payments}}
+	<h4>Your outstanding bill since your last payment is: ${{=roommate_bill}}</h4>
+{{pass}}
+
+{{if is_admin_user:}}
+	<h5><i>(When your roommates open this page, they will have a link to pay here)</i></h5>
+{{pass}}
+
+{{if not is_admin_user:}}
+	<h4><a href="{{=URL('pay_bill', args=[auth.user_id, roommate_bill, request.args(0)])}}">Click here to pay your current bill</a></h4>
+{{pass}}
+
+<h3>All Bills</h3>
+<table>
+	<tr>
+		<td><strong>Bill Date</strong></td>
+		<td><strong>Company</strong></td>
+		<td><strong>Amount</strong></td>
+		<td><strong>Bill Document</strong></td>
+	</tr>
+{{for bill in home_bills:}}
+	<tr>
+		<td>{{=bill.created_on}}</td>
+		<td>{{=bill.company_name}}</td>
+		<td>${{=bill.amount}}</td>
+		<td><a href={{=URL('download', args=bill.bill)}}>Download Bill</a></td>
+	<tr>
+{{pass}}
+</table>
