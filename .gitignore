@@ -3,3 +3,4 @@ errors/*
 private/*
 sessions/*
 uploads/*
+*.pyc

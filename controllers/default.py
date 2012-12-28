@@ -104,8 +104,6 @@ def view_bills():
     if auth.user_id == admin_id:
         is_admin_user = True
 
-    print_me()
-
     return locals()
 
 # Users can make a request to join a home and view its bills by providing the home's ID
