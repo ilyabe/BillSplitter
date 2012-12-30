@@ -115,21 +115,6 @@ def join_home():
     form = SQLFORM(db.user_home, fields=['home']).process()
     return locals()
 
-# Called when user submits home_id on join_home, should validate user is not a roommate at that home already
-@request.restful()
-def confirm_join():
-    print str(request.now)
-    print str(request.args(0))
-
-    def GET(name):
-        print 'called GET'
-        return str(name)
-
-    def PUT(name):
-        print 'called PUT'
-        return str(name)
-    return locals()
-
 # A home's admin can approve/deny requests to join
 @auth.requires_login()
 def review():
