@@ -101,7 +101,7 @@ db.define_table('bill',
 # A table to store user-home pairs. i.e. the homes where the user is a roommate and whether they are admin
 db.define_table('user_home',
     Field('user', 'reference auth_user'),
-    Field('home', 'reference home', requires=IS_IN_DB(db, 'home.id'), label='Home ID'),
+    Field('home', 'reference home', requires=[IS_NOT_EMPTY(), IS_IN_DB(db, 'home.id')], label='Home ID'), 
     Field('is_admin', 'boolean', writable=False),
     Field('status', 'string', writable=False),
     Field('amount_paid', 'decimal(10,2)'))
